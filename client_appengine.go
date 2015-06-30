@@ -6,13 +6,13 @@
 
 // App Engine hooks.
 
-package oauth2
+package pixiv_oauth2
 
 import (
 	"net/http"
 
+	"github.com/kanosaki/pixiv_oauth2/internal"
 	"golang.org/x/net/context"
-	"golang.org/x/oauth2/internal"
 	"google.golang.org/appengine/urlfetch"
 )
 

@@ -1,4 +1,4 @@
-package oauth2
+package pixiv_oauth2
 
 import (
 	"net/http"

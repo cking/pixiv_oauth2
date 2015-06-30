@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2_test
+package pixiv_oauth2_test
 
 import (
 	"fmt"
 	"log"
 
-	"golang.org/x/oauth2"
+	oauth2 "github.com/kanosaki/pixiv_oauth2"
 )
 
 func ExampleConfig() {

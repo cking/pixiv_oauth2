@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package oauth2
+package pixiv_oauth2
 
 import (
 	"net/http"
@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/kanosaki/pixiv_oauth2/internal"
 	"golang.org/x/net/context"
-	"golang.org/x/oauth2/internal"
 )
 
 // expiryDelta determines how earlier a token should be considered
