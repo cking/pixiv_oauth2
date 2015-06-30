@@ -1,3 +1,9 @@
+# OAuth2 for PixivAPI
+
+This pakcage provides pixiv api authorization.
+
+- - - - 
+
 # OAuth2 for Go
 
 [![Build Status](https://travis-ci.org/golang/oauth2.svg?branch=master)](https://travis-ci.org/golang/oauth2)
