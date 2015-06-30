@@ -63,6 +63,10 @@ type tokenJSON struct {
 	Expires      expirationTime `json:"expires"`    // broken Facebook spelling of expires_in
 }
 
+type pixivTokenJSON struct {
+	Response tokenJSON `json:"response"`
+}
+
 func (e *tokenJSON) expiry() (t time.Time) {
 	if v := e.ExpiresIn; v != 0 {
 		return time.Now().Add(time.Duration(v) * time.Second)
@@ -191,10 +195,11 @@ func RetrieveToken(ctx context.Context, ClientID, ClientSecret, TokenURL string,
 			token.Expiry = time.Now().Add(time.Duration(expires) * time.Second)
 		}
 	default:
-		var tj tokenJSON
-		if err = json.Unmarshal(body, &tj); err != nil {
+		var ptj pixivTokenJSON
+		if err = json.Unmarshal(body, &ptj); err != nil {
 			return nil, err
 		}
+		tj := ptj.Response
 		token = &Token{
 			AccessToken:  tj.AccessToken,
 			TokenType:    tj.TokenType,
