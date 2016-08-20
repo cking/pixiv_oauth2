@@ -1,4 +1,4 @@
-// Copyright 2014 The oauth2 Authors. All rights reserved.
+// Copyright 2014 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -27,10 +27,10 @@ func ExampleConfig() {
 	url := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
 	fmt.Printf("Visit the URL for the auth dialog: %v", url)
 
-	// Use the authorization code that is pushed to the redirect URL.
-	// NewTransportWithCode will do the handshake to retrieve
-	// an access token and initiate a Transport that is
-	// authorized and authenticated by the retrieved token.
+	// Use the authorization code that is pushed to the redirect
+	// URL. Exchange will do the handshake to retrieve the
+	// initial access token. The HTTP Client returned by
+	// conf.Client will refresh the token as necessary.
 	var code string
 	if _, err := fmt.Scan(&code); err != nil {
 		log.Fatal(err)
