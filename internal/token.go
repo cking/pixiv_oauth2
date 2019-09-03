@@ -6,6 +6,7 @@
 package internal
 
 import (
+	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -17,7 +18,12 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/net/context"
+	"context"
+)
+
+const (
+	//!PIXIV client hash
+	clientHash = "28c1fdd170a5204386cb1313c7077b34f83e4aaf4aa829ce78c231e05b0bae2c"
 )
 
 // Token represents the crendentials used to authorize
@@ -164,6 +170,14 @@ func RetrieveToken(ctx context.Context, clientID, clientSecret, tokenURL string,
 	if err != nil {
 		return nil, err
 	}
+
+	//!PIXIV change
+	ts := time.Now().Format(time.RFC3339)
+	hash := ts + clientHash
+	hash = fmt.Sprintf("%x", md5.New().Sum([]byte(hash)))
+	req.Header.Set("X-Client-Time", ts)
+	req.Header.Set("X-Client-Hash", hash)
+
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	if !bustedAuth {
 		req.SetBasicAuth(clientID, clientSecret)
