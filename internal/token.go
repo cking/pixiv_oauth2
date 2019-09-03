@@ -7,6 +7,7 @@ package internal
 
 import (
 	"crypto/md5"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -174,7 +175,9 @@ func RetrieveToken(ctx context.Context, clientID, clientSecret, tokenURL string,
 	//!PIXIV change
 	ts := time.Now().Format(time.RFC3339)
 	hash := ts + clientHash
-	hash = fmt.Sprintf("%x", md5.New().Sum([]byte(hash)))
+	hasher := md5.New()
+	hasher.Write([]byte(hash))
+	hash = hex.EncodeToString(hasher.Sum(nil))
 	req.Header.Set("X-Client-Time", ts)
 	req.Header.Set("X-Client-Hash", hash)
 
